@@ -2,8 +2,12 @@ package com.example.proyecto.web.grupo1;
 
 import com.example.proyecto.web.grupo1.camiones.Camiones;
 import com.example.proyecto.web.grupo1.camiones.ICamionesService;
+import com.example.proyecto.web.grupo1.carretas.Carretas;
+import com.example.proyecto.web.grupo1.carretas.ICarretasService;
 import com.example.proyecto.web.grupo1.empleados.Empleados;
 import com.example.proyecto.web.grupo1.empleados.IEmpleadosService;
+import com.example.proyecto.web.grupo1.tractos.ITractosService;
+import com.example.proyecto.web.grupo1.tractos.Tractos;
 import com.example.proyecto.web.grupo1.viajes.Viajes;
 import com.example.proyecto.web.grupo1.viajes.IViajesService;
 import java.util.Date;
@@ -28,7 +32,11 @@ public class ControladorViajes {
     private IEmpleadosService serviceE;
     
     @Autowired
-    private ICamionesService serviceC;
+    private ICarretasService serviceC;
+
+    @Autowired
+    private ITractosService serviceT;    
+    
     
     @GetMapping("/listadoViajes")
     public String Mostrar(Model model) {
@@ -38,10 +46,13 @@ public class ControladorViajes {
         List<Empleados> empleados = serviceE.Listar();
         model.addAttribute("empleados", empleados);
         
-        List<Camiones> camiones = serviceC.Listar();
-        model.addAttribute("camiones", camiones);
+        List<Tractos> tractos = serviceT.Listar();
+        model.addAttribute("tractos", tractos);
+
+        List<Carretas> carretas = serviceC.Listar();
+        model.addAttribute("carretas", carretas);
         
-        return "viajes/listadoViajes"; //listadiCamiones.html
+        return "viajes/listadoviajes"; //listadiCamiones.html
     }
 
     @GetMapping("/eliminarViaje")
@@ -60,8 +71,8 @@ public class ControladorViajes {
     public String Registrar(@RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha,
             @RequestParam("TipoServicio") String TipoServicio,
             @RequestParam("nombre") Empleados nombre,
-            @RequestParam("PlacaTracto") Camiones PlacaTracto,
-            @RequestParam("PlacaCarreta") Camiones PlacaCarreta,
+            @RequestParam("PlacaTracto") Tractos PlacaTracto,
+            @RequestParam("PlacaCarreta") Carretas PlacaCarreta,
             @RequestParam("Cliente") String Cliente,
             @RequestParam("Destino") String Destino,
             @RequestParam("AlmacenRetiroContenedor") String AlmacenRetiroContenedor,
@@ -72,8 +83,8 @@ public class ControladorViajes {
         v.setFecha(Fecha);
         v.setTipoServicio(TipoServicio);
         v.setEmpleados(nombre);
-        v.setCamiones(PlacaTracto);
-        v.setCamiones(PlacaCarreta);
+        v.setTractos(PlacaTracto);
+        v.setCarretas(PlacaCarreta);
         v.setCliente(Cliente);
         v.setDestino(Destino);
         v.setAlmacenRetiroContenedor(AlmacenRetiroContenedor);
@@ -95,8 +106,8 @@ public class ControladorViajes {
             @RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha,
             @RequestParam("TipoServicio") String TipoServicio,
             @RequestParam("nombre") Empleados nombre,
-            @RequestParam("PlacaTracto") Camiones PlacaTracto,
-            @RequestParam("PlacaCarreta") Camiones PlacaCarreta,
+            @RequestParam("PlacaTracto") Tractos PlacaTracto,
+            @RequestParam("PlacaCarreta") Carretas PlacaCarreta,
             @RequestParam("Cliente") String Cliente,
             @RequestParam("Destino") String Destino,
             @RequestParam("AlmacenRetiroContenedor") String AlmacenRetiroContenedor,
@@ -108,8 +119,8 @@ public class ControladorViajes {
         v.setFecha(Fecha);
         v.setTipoServicio(TipoServicio);
         v.setEmpleados(nombre);
-        v.setCamiones(PlacaTracto);
-        v.setCamiones(PlacaCarreta);
+        v.setTractos(PlacaTracto);
+        v.setCarretas(PlacaCarreta);
         v.setCliente(Cliente);
         v.setDestino(Destino);
         v.setAlmacenRetiroContenedor(AlmacenRetiroContenedor);
@@ -127,8 +138,11 @@ public class ControladorViajes {
         List<Empleados> empleados = serviceE.Listar();
         model.addAttribute("empleados", empleados);
         
-        List<Camiones> camiones = serviceC.Listar();
-        model.addAttribute("camiones", camiones);
+       List<Tractos> tractos = serviceT.Listar();
+        model.addAttribute("tractos", tractos);
+
+        List<Carretas> carretas = serviceC.Listar();
+        model.addAttribute("carretas", carretas);
         
         return "viajes/listadoViajes";   
     }
@@ -136,14 +150,14 @@ public class ControladorViajes {
     public String MostrarAscendente(Model model) {
         List<Viajes> viajes = serviceViaje.ListarOrdenAscendente();
         model.addAttribute("viajes", viajes);
-        return "viajes/listadoViajes";//listaantenciones.html
+        return "viajes/listadoviajes";//listaantenciones.html
     }
     
     @GetMapping("/descendenteViajes")
     public String MostrarDescendente(Model model) {
         List<Viajes> viajes = serviceViaje.ListarOrdenDescendente();
         model.addAttribute("viajes", viajes);
-        return "viajes/listadoViajes";//listaantenciones.html
+        return "viajes/listadoviajes";//listaantenciones.html
     }   
      @GetMapping("/reporte")
     public String ReporteGrafico(Model model)
@@ -167,6 +181,6 @@ public class ControladorViajes {
          graphData.put("IMPORTACION",cantimpo);
          
         model.addAttribute("graphData", graphData);
-        return "viajes/reporteViajes"; //grafico.html
+        return "viajes/reporteviajes"; //grafico.html
     }
 }

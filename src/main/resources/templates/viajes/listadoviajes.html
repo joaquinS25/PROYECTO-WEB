@@ -111,11 +111,11 @@
 
 
                     const id = button.getAttribute('data-bs-id');
-                    const Fecha = button.getAttribute('data-bs-Fecha');
-                    const TipoServicio = button.getAttribute('data-bs-TipoServicio');
                     const nombre = button.getAttribute('data-bs-nombre');
                     const PlacaTracto = button.getAttribute('data-bs-PlacaTracto');
                     const PlacaCarreta = button.getAttribute('data-bs-PlacaCarreta');
+                    const Fecha = button.getAttribute('data-bs-Fecha');
+                    const TipoServicio = button.getAttribute('data-bs-TipoServicio');
                     const Cliente = button.getAttribute('data-bs-Cliente');
                     const Destino = button.getAttribute('data-bs-Destino');
                     const AlmacenRetiroContenedor = button.getAttribute('data-bs-AlmacenRetiroContenedor');
@@ -125,11 +125,11 @@
                     //campos
                     //const campoNumOrden = document.getElementById("NumOrden");
                     const campoId = document.getElementById("id");
-                    const campoFecha = document.getElementById("Fechax");
-                    const campoTipoServicio = document.getElementById("TipoServiciox");
                     const camponombre = document.getElementById("nombrex");
                     const campoPlacaTracto = document.getElementById("PlacaTractox");
                     const campoPlacaCarreta = document.getElementById("PlacaCarretax");
+                    const campoFecha = document.getElementById("Fechax");
+                    const campoTipoServicio = document.getElementById("TipoServiciox");
                     const campoCliente = document.getElementById("Clientex");
                     const campoDestino = document.getElementById("Destinox");
                     const campoAlmacenRetiroContenedor = document.getElementById("AlmacenRetiroContenedorx");
@@ -138,11 +138,11 @@
                     //Colocar los datos a los campos
                     //campoNumOrden.value = NumOrden;
                     campoId.value = id;
-                    campoFecha.value = Fecha;
-                    campoTipoServicio.value = TipoServicio;
                     camponombre.value = nombre;
                     campoPlacaTracto.value = PlacaTracto;
                     campoPlacaCarreta.value = PlacaCarreta;
+                    campoFecha.value = Fecha;
+                    campoTipoServicio.value = TipoServicio;
                     campoCliente.value = Cliente;
                     campoDestino.value = Destino;
                     campoAlmacenRetiroContenedor.value = AlmacenRetiroContenedor;
@@ -173,6 +173,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/listadoFacturas}">Facturas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  " th:href="@{/listadoTracto}" aria-current="page">Tractos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/listadoCarretas}">Carretas</a>
             </li>
         </ul>
         <div class="container">
@@ -227,8 +233,8 @@
                     <td th:text="${#dates.format(viajes.Fecha, 'dd-MMM-yyyy')}"></td>
                     <td th:text="${viajes.TipoServicio}"></td>
                     <td th:text="${viajes.empleados.nombre}"></td>
-                    <td th:text="${viajes.camiones.PlacaTracto}"></td>
-                    <td th:text="${viajes.camiones.PlacaCarreta}"></td>                        
+                    <td th:text="${viajes.tractos.PlacaTracto}"></td>
+                    <td th:text="${viajes.carretas.PlacaCarreta}"></td>                        
                     <td th:text="${viajes.Cliente}"></td>
                     <td th:text="${viajes.Destino}"></td>
                     <td th:text="${viajes.AlmacenRetiroContenedor}"></td>
@@ -243,8 +249,8 @@
                                 data-bs-Fecha=${viajes.Fecha},
                                 data-bs-TipoServicio=${viajes.TipoServicio},
                                 data-bs-nombre=${viajes.empleados.nombre},
-                                data-bs-PlacaTracto=${viajes.camiones.PlacaTracto},
-                                data-bs-PlacaCarreta=${viajes.camiones.PlacaCarreta},
+                                data-bs-PlacaTracto=${viajes.tractos.PlacaTracto},
+                                data-bs-PlacaCarreta=${viajes.carretas.PlacaCarreta},
                                 data-bs-Cliente=${viajes.Cliente},
                                 data-bs-Destino=${viajes.Destino},
                                 data-bs-AlmacenRetiroContenedor=${viajes.AlmacenRetiroContenedor},
@@ -285,14 +291,14 @@
                                     <label for="recipient-name" class="col-form-label">Placa Tracto:</label>
                                     <select name="PlacaTracto" id="PlacaTracto" class="form-control">
                                         <option value="">Seleccione</option>
-                                        <option th:each="camiones : ${camiones}" th:value="${camiones.id}" th:text="${camiones.PlacaTracto}"></option>
+                                        <option th:each="tractos : ${tractos}" th:value="${tractos.id}" th:text="${tractos.PlacaTracto}"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="recipient-name" class="col-form-label">Placa Carreta:</label>
                                     <select name="PlacaCarreta" id="PlacaCarreta" class="form-control">
                                         <option value="">Seleccione</option>
-                                        <option th:each="camiones : ${camiones}" th:value="${camiones.id}" th:text="${camiones.PlacaCarreta}"></option>
+                                        <option th:each="carretas : ${carretas}" th:value="${carretas.id}" th:text="${carretas.PlacaCarreta}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -367,14 +373,14 @@
                                     <label for="recipient-name" class="col-form-label">Placa Tracto:</label>
                                     <select name="PlacaTracto" id="PlacaTractox" class="form-control">
                                         <option value="">Seleccione</option>
-                                        <option th:each="camiones : ${camiones}" th:value="${camiones.id}" th:text="${camiones.PlacaTracto}"></option>
+                                        <option th:each="tractos : ${tractos}" th:value="${tractos.id}" th:text="${tractos.PlacaTracto}"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="recipient-name" class="col-form-label">Placa Carreta:</label>
                                     <select name="PlacaCarreta" id="PlacaCarretax" class="form-control">
                                         <option value="">Seleccione</option>
-                                        <option th:each="camiones : ${camiones}" th:value="${camiones.id}" th:text="${camiones.PlacaCarreta}"></option>
+                                        <option th:each="carretas : ${carretas}" th:value="${carretas.id}" th:text="${carretas.PlacaCarreta}"></option>
                                     </select>
                                 </div>
                             </div>

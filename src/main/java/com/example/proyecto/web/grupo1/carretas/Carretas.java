@@ -13,6 +13,9 @@ import lombok.Data;
 public class Carretas {
      @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY) //Autoincremental
-      private int id;
+     private int id;
      private String PlacaCarreta;
+     private String Peso;
+     private String Largo;
+     private String Ancho;
 }

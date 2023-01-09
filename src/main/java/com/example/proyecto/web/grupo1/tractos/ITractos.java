@@ -1,7 +1,14 @@
 package com.example.proyecto.web.grupo1.tractos;
 
 import com.example.proyecto.web.grupo1.carretas.*;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ITractos {
-    
+@Repository
+public interface ITractos extends CrudRepository<Tractos,Integer>{
+    @Query(value="SELECT *FROM tractos "
+            + "WHERE placa_tracto LIKE %?1%",nativeQuery = true)
+    List<Tractos> buscarPorTodo(String dato);
 }
