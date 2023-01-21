@@ -215,7 +215,7 @@
                         <td>
                             <a onclick="return Eliminar(this)" th:href="@{/eliminarCamion(id=${camiones.id})}" class="btn btn-danger"> <i class="bi bi-trash-fill"></i> </a>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditar" 
-                                    th:attr="data-bs-id=${viajes.id},
+                                    th:attr="data-bs-id=${camiones.id},
                                     data-bs-PlacaTracto=${camiones.tractos.PlacaTracto},
                                     data-bs-PlacaCarreta=${camiones.carretas.PlacaCarreta},
                                     data-bs-Marca=${camiones.Marca},
