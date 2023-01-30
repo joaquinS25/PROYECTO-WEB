@@ -14,6 +14,32 @@
         <!-- SweetAlert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+             function Agregar1() {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: '¿Estas seguro de agregar un nuevo viaje?',
+                    text: "Se podrá modificar en el futuro",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                                'Agregado!',
+                                'El viaje ha sido agregado.',
+                                'Exito'
+                                ).then((result) => {
+                            if (result.isConfirmed) {
+                                const formulario = document.getElementById('agregar');
+                                formulario.submit();
+                            }
+                        });
+                    }
+                });
+            }
             function Eliminar(opcion)
             {
                 event.preventDefault();
@@ -162,9 +188,6 @@
                     <div class="col-auto">
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i>Agregar Viaje</button>
                     </div>
-                    <div class="col-auto">
-                        <a th:href="@{/reporte}" class="btn btn-primary"><i class="bi bi-bar-chart-fill"></i>Reporte</a>
-                    </div>
                 </form>
                 <hr class="container">
             </div>
@@ -273,75 +296,51 @@
 
                     </div>
                     <div class="modal-body p-5">
-                        <form action="registroViajes" method="POST" id="agregar">
-
-                            <div class="col-md-12 mb-2">
-                                <label for="recipient-name" class="col-form-label">Conductor:</label>
-                                <select name="nombre" id="nombre" class="form-control">
-                                    <option value="">Seleccione</option>
-                                    <option th:each="empleados : ${empleados}" th:value="${empleados.id}" th:text="${empleados.nombre}"></option>
-                                </select>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <div class="col-md-6 me-3">
-                                    <label for="recipient-name" class="col-form-label">Placa Tracto:</label>
-                                    <select name="PlacaTracto" id="PlacaTracto" class="form-control">
+                        <form action="registroEmpleados" method="POST" id="agregar" class="row g-3 needs-validation p-4" novalidate> 
+                                <div class="col-md-0">
+                                    <input class="form-control" type="hidden" name="id" required="required" placeholder="Id">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="exampleFormControlInput2" class="form-label">DNI</label>
+                                    <input type="text" name="dni" id="dni" class="form-control" required>                    
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="exampleFormControlInput1" class="form-label">Nombre completo</label>
+                                    <input type="text" name="nombre" id="nombre" class="form-control" required>                    
+                                </div>
+                                <div  class="col-md-6">
+                                    <label for="validationTooltip03" class="form-label">Sexo</label>
+                                    <!--input type="text" name="sexo" id="sexo" class="form-control" required-->   
+                                   <select name="sexo" id="sexo" class="form-control">
                                         <option value="">Seleccione</option>
-                                        <option th:each="tractos : ${tractos}" th:value="${tractos.id}" th:text="${tractos.PlacaTracto}"></option>
+                                        <option>MASCULINO</option>
+                                        <option>FEMENINO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="recipient-name" class="col-form-label">Placa Carreta:</label>
-                                    <select name="PlacaCarreta" id="PlacaCarreta" class="form-control">
-                                        <option value="">Seleccione</option>
-                                        <option th:each="carretas : ${carretas}" th:value="${carretas.id}" th:text="${carretas.PlacaCarreta}"></option>
-                                    </select>
+                                    <label for="exampleFormControlInput3" class="form-label">N° Licencia</label>
+                                    <input type="text" name="num_licencia" id="num_licencia" class="form-control" required>                    
                                 </div>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <div class=" col-md-6 me-3">
-                                    <label for="message-text" class="col-form-label">Fecha:</label>
-                                    <input type="date" name="Fecha" id="Fecha" placeholder="Ingrese Fecha" class="form-control">
+                                <div class="col-md-4">
+                                    <label for="exampleFormControlInput4" class="form-label">Celular</label>
+                                    <input type="text" name="celular" id="celular" class="form-control" required>                    
                                 </div>
-                                <div class=" col-md-6">
-                                    <label for="recipient-name" class="col-form-label">Tipo de Servicio:</label>
-                                    <select name="TipoServicio" id="TipoServicio" class="form-control">
-                                        <option value="">Seleccione</option>
-                                        <option>EXPORTACION</option>
-                                        <option>IMPORTACION</option>
-                                    </select>
-                                    <!--input type="text" name="TipoServicio" id="TipoServicio" placeholder="Ingrese Tipo de Servicio" class="form-control"-->
+                                <div class="col-md-8">
+                                    <label for="exampleFormControlInput5" class="form-label">Correo</label>
+                                    <input type="email" name="correo" id="correo" class="form-control" required>                    
                                 </div>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <div class=" col-md-6 me-3">
-                                    <label for="recipient-name" class="col-form-label">Cliente:</label>
-                                    <input type="text" name="Cliente" id="Cliente" placeholder="Ingrese Cliente" class="form-control">
-                                </div>
-                                <div class=" col-md-6">
-                                    <label for="recipient-name" class="col-form-label">Destino</label>
-                                    <input type="text" name="Destino" id="Destino" placeholder="Ingrese Destino" class="form-control">
-                                </div>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <div class="col-md-6 me-3">
-                                    <label for="recipient-name" class="col-form-label">Almacen Retiro del Contenedor</label>
-                                    <input type="text" name="AlmacenRetiroContenedor" id="AlmacenRetiroContenedor" placeholder="Ingrese Almacen Retiro del Contenedor" class="form-control">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label for="recipient-name" class="col-form-label">Almacen Devolucion del Contenedor</label>
-                                    <input type="text" name="AlmacenDevolucionContenedor" id="AlmacenDevolucionContenedor" placeholder="Ingrese Almacen Devolucion del Contenedor" class="form-control">
-                                </div>
-                            </div>
-                            <div class=" col-md-12 ">
-                                <label for="recipient-name" class="col-form-label">Monto del Viaje</label>
-                                <input type="text" name="MontoViaje" id="MontoViaje" placeholder="Ingrese Monto de Viaje" class="form-control">
-                            </div>
-                        </form>
+                                <div class="col-md-12">
+                                    <label for="exampleFormControlInput6" class="form-label">Dirección</label>
+                                    <input type="text" name="direccion" id="direccion" class="form-control" required>                    
+                                </div>                        
+                                <!--div class="d-grid gap-3 mt-5 mb-2">
+                                    <button onclick="return Agregar1()" class="btn btn-warning" type="submit" name="registrar"><i class="bi bi-check-circle-fill"></i> Agregar Empleado</button>
+                                </div--> 
+                            </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button onclick="return Agregar1()" type="button" class="btn btn-primary">Registrar</button>
+                        <button onclick="return Agregar1()" type="submit" name="registrar" class="btn btn-primary">Registrar</button>
                     </div>
                 </div>
             </div>
