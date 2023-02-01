@@ -131,7 +131,6 @@
         <div class="m-5">
             <table class="table table-striped mb-5">
                 <tr class="table-primary">
-                    <th>#</th>
                     <th>Id</th>                    
                     <th>Placa Tracto</th>
                     <th>Tipo de Tracción</th>
@@ -141,7 +140,7 @@
                     <th>Aciones</th>
                 </tr>
                 <tr th:each="tractos,status : ${tractos}"  th:if="${tractos.id!=''}">
-                    <td th:text="${status.count}"></td>
+                   
                     <td th:text="${tractos.id}"></td>                   
                     <td th:text="${tractos.PlacaTracto}"></td>
                     <td th:text="${tractos.TipoTraccion}"></td>

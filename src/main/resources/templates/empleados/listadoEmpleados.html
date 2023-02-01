@@ -195,7 +195,6 @@
             <div class="container">
                 <table class="table table-striped mb-5">
                     <tr class="table-primary">
-                        <th>#</th>
                         <th>Id</th>
                         <th>DNI</th>
                         <th>Nombre Completo</th>
@@ -207,7 +206,7 @@
                         <th>Acciones</th>
                     </tr>
                     <tr th:each="empleados,status : ${empleados}"  th:if="${empleados.id!=''}">
-                        <td th:text="${status.count}"></td>
+                        
                         <td th:text="${empleados.id}"></td>
                         <td th:text="${empleados.dni}"></td>
                         <td th:text="${empleados.nombre}"></td>

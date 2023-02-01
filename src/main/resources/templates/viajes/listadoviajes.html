@@ -212,7 +212,6 @@
         <div class="m-5">
             <table class="table table-striped mb-5">
                 <tr class="table-primary">
-                    <th>#</th>
                     <th>Id</th>
                     <th>Fecha</th>
                     <th>Tipo de Servicio</th>
@@ -228,7 +227,7 @@
                     <th>Aciones</th>
                 </tr>
                 <tr th:each="viajes,status : ${viajes}"  th:if="${viajes.id!=''}">
-                    <td th:text="${status.count}"></td>
+                    
                     <td th:text="${viajes.id}"></td>
                     <td th:text="${#dates.format(viajes.Fecha, 'dd-MMM-yyyy')}"></td>
                     <td th:text="${viajes.TipoServicio}"></td>

@@ -194,7 +194,6 @@
             <div class="container">
                 <table class="table table-striped mb-5">
                     <tr class="table-primary">
-                        <th>#</th>
                         <th>Id</th>
                         <th>Placa de Tracto</th>
                         <th>Placa de Carreta</th>
@@ -204,7 +203,7 @@
                         <th>Acciones</th>
                     </tr>
                     <tr th:each="camiones,status : ${camiones}"  th:if="${camiones.id!=''}">
-                        <td th:text="${status.count}"></td>
+                        
                         <td th:text="${camiones.id}"></td>
                         <td th:text="${camiones.tractos.PlacaTracto}"></td>
                         <td th:text="${camiones.carretas.PlacaCarreta}"></td>

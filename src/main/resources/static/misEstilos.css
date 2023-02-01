@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "letra-mascotas";
+    src: url(../fonts/puppybellies/PuppyBellies.ttf);
+}
+.fondo-trailer{
+    background: url("fondo.webp");
+    background-size: 100%;
+    background-repeat: repeat;
+}
+/*FONDO TRANSPARENTE PARA EL LOGIN*/
+.detallando{
+    background-color: rgba(0, 0, 0, 0.356);
+    width: 30rem;
+    height: 100%;
+    margin-left: 170px;
+}
+/*FONDO DEL BOTON DEL LOGIN*/
+.btn-fondo{
+    font-family: 'letra-mascotas';
+    font-weight:bolder;
+    background: rgb(103,210,245);
+    background: linear-gradient(180deg, rgba(114,45,223,1) 37%, rgba(2,116,167,1) 190%, rgba(84,110,150,1) 240%);
+    
+}
+.btn-fondo:hover{
+    font-family: 'letra-mascotas';
+    font-weight:bolder;
+    color: black !important;
+    background: linear-gradient(180deg, rgba(52,174,228,1) 38%, rgba(54,129,247,1) 63%, rgba(84,110,150,1) 84%);
+
+}
+
+

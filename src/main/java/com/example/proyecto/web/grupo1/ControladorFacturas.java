@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -137,4 +139,38 @@ public class ControladorFacturas {
         model.addAttribute("facturas", facturas);
         return "facturas/listadoFacturas";//listaantenciones.html
     }   
+    @GetMapping("/reporteFacturas")
+    public String ReporteGrafico(Model model)
+    {
+        int cantSoles = 0;
+        int cantDolares = 0;
+        float MontoSoles = 0;
+        float MontoDolares = 0;
+        
+        Map<String, Integer> graphData = new TreeMap<>();
+        List<Facturas> facturas = serviceFacturas.Listar();
+        for (int i = 0; i < facturas.size(); i++) 
+        {
+           
+            String nom = facturas.get(i).getTipoMoneda();
+            
+            if(nom.equals("$")){
+                cantDolares++;
+                MontoDolares = MontoDolares + facturas.get(i).getMonto();
+            }else{
+                cantSoles++;
+                MontoSoles = MontoSoles + facturas.get(i).getMonto();
+
+            }
+        }
+         graphData.put("SOLES",cantSoles);
+         graphData.put("DOLARES",cantDolares);
+         
+        /* graphData.put("MONTO SOLES",Float.parseFloat(MontoSoles));
+         graphData.put("MONTO DOLARES",Float.parseFloat(MontoDolares));*/
+         
+         
+        model.addAttribute("graphData", graphData);
+        return "facturas/reporteFacturas"; //grafico.html
+    }
 }

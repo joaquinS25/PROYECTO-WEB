@@ -26,15 +26,15 @@
             });
             function drawColumnChart() {
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'TipoServicio');
+                data.addColumn('string', 'TipoMoneda');
                 data.addColumn('number', 'Cantidad');
                 Object.keys(real_data).forEach(function (key) {
                     data.addRow([key, real_data[key]]);
                 });
                 var options = {
-                    title: 'Cantidad de viajes por tipo de servicio',
+                    title: 'Cantidad de Facturas por tipo de moneda',
                     hAxis: {
-                        title: 'Tipo de servicio'
+                        title: 'Tipo de moneda'
                     },
                     vAxis: {
                         title: 'Cantidad'
@@ -46,13 +46,13 @@
             }
             function drawPieChart() {
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Tipo de servicio');
+                data.addColumn('string', 'Tipo de moneda');
                 data.addColumn('number', 'Cantidad');
                 Object.keys(real_data).forEach(function (key) {
                     data.addRow([key, real_data[key]]);
                 });
                 var options = {
-                    title: 'Cantidad de viajes por tipo de servicio'
+                    title: 'Cantidad de facturas por tipo de moneda'
                 };
                 var chart = new google.visualization.PieChart(document
                         .getElementById('circular'));
