@@ -17,6 +17,7 @@ public class Empleados {
     int id;
     String dni;
     String nombre;
+    String apellido;
     String sexo;
     String num_licencia;
     String celular;

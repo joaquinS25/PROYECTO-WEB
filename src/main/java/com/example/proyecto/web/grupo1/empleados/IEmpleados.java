@@ -11,6 +11,7 @@ public interface IEmpleados extends CrudRepository<Empleados,Integer>{
     @Query(value="SELECT * FROM empleados "
             + "WHERE dni LIKE %?1% "
             + "OR nombre LIKE %?1% "
+            + "OR apellido LIKE %?1% "
             + "OR num_licencia LIKE %?1%",nativeQuery = true)
     List<Empleados> buscarPorTodo(String dato);
     

@@ -56,6 +56,7 @@ public class Controlador {
     @PostMapping("/registroEmpleados")
     public String Registrar(@RequestParam("dni") String dni,
             @RequestParam("nombre") String nom,
+            @RequestParam("apellido") String ape,
             @RequestParam("sexo") String sexo,
             @RequestParam("num_licencia") String numLic,
             @RequestParam("celular") String celular,
@@ -65,6 +66,7 @@ public class Controlador {
         Empleados e = new Empleados();
         e.setDni(dni);
         e.setNombre(nom);
+        e.setApellido(ape);
         e.setSexo(sexo);
         e.setNum_licencia(numLic);
         e.setCelular(celular);
@@ -85,6 +87,7 @@ public class Controlador {
     public String Actualizar(@RequestParam("id") int id,
             @RequestParam("dni") String dni,
             @RequestParam("nombre") String nom,
+            @RequestParam("apellido") String ape,
             @RequestParam("sexo") String sexo,
             @RequestParam("num_licencia") String numLic,
             @RequestParam("celular") String celular,
@@ -95,6 +98,7 @@ public class Controlador {
         e.setId(id);
         e.setDni(dni);
         e.setNombre(nom);
+        e.setApellido(ape);
         e.setSexo(sexo);
         e.setNum_licencia(numLic);
         e.setCelular(celular);

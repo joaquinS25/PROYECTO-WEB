@@ -38,8 +38,9 @@
                             }
                         });
                     }
-                });
+                }); 
             }
+           
             function Eliminar(opcion)
             {
                 event.preventDefault();
@@ -338,13 +339,13 @@
                             </div>
                             <div class=" col-md-12 ">
                                 <label for="recipient-name" class="col-form-label">Monto del Viaje</label>
-                                <input type="text" name="MontoViaje" id="MontoViaje" placeholder="Ingrese Monto de Viaje" class="form-control">
+                                <input type="number" min ="1" max="9999" name="MontoViaje" id="MontoViaje" placeholder="Ingrese Monto de Viaje" class="form-control">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button onclick="return Agregar1()" type="button" class="btn btn-primary">Registrar</button>
+                        <button onclick="return Agregar1()" type="button" name="grabar" class="btn btn-primary">Registrar</button>
                     </div>
                 </div>
             </div>
