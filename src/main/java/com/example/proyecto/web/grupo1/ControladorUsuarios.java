@@ -1,8 +1,11 @@
 package com.example.proyecto.web.grupo1;
 
+import com.example.proyecto.web.grupo1.roles.IRolesService;
+import com.example.proyecto.web.grupo1.roles.Roles;
 import com.example.proyecto.web.grupo1.usuarios.IUsuariosService;
 import com.example.proyecto.web.grupo1.usuarios.Usuarios;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,19 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ControladorUsuarios {
     @Autowired
     private IUsuariosService serviceUsuarios;
-    @GetMapping("/usuarios")
+    @Autowired
+    private IRolesService serviceRol;
+
+     @GetMapping("/usuarios")
     public String Mostrar(Model model) {
         List<Usuarios> usuarios = serviceUsuarios.Listar();
         model.addAttribute("usuarios", usuarios);
+        
+        List<Roles> rol = serviceRol.Listar();
+        model.addAttribute("rol", rol);
+        
         return "usuarios"; //listapatenciones.html
     }
-     @GetMapping("/eliminarUsuario")
+    @GetMapping("/eliminarUsuario")
     public String Eliminar(@RequestParam("id") int id, Model model) {
 
         serviceUsuarios.Eliminar(id);
         return Mostrar(model);
     }
-    
+
     @PostMapping("/registroUsuarios")
     public String Registrar(@RequestParam("dni") String dni,
             @RequestParam("nombre") String nom,
@@ -34,8 +44,12 @@ public class ControladorUsuarios {
             @RequestParam("celular") String celular,
             @RequestParam("correo") String correo,
             @RequestParam("direccion") String direc,
-            @RequestParam("cargo") String cargo,
-            Model model) {
+            @RequestParam("cargo") Roles cargo,
+            @RequestParam("contraseña") String contra,
+            Model model, Map<String,Object> modelo ) {
+        
+        Roles rol = new Roles();
+        modelo.put("rol", rol);
         Usuarios u = new Usuarios();
         u.setDni(dni);
         u.setNombre(nom);
@@ -43,9 +57,11 @@ public class ControladorUsuarios {
         u.setCelular(celular);
         u.setCorreo(correo);
         u.setDireccion(direc);
-        u.setTipoRol(cargo);
+        u.setTipoRol((List<Roles>) cargo);
+        u.setPassword(contra);
         serviceUsuarios.Guardar(u);
         return Mostrar(model);
+        
     }
 
     /*@GetMapping("/editarEmpleado")
@@ -54,8 +70,7 @@ public class ControladorUsuarios {
         model.addAttribute("empleados", empleados);
         return "empleados/editarEmpleado"; //editarEmpleado.html
     }*/
-
-    @PostMapping("/actualizarUsuario")
+     @PostMapping("/actualizarUsuario")
     public String Actualizar(@RequestParam("id") int id,
            @RequestParam("dni") String dni,
             @RequestParam("nombre") String nom,
@@ -63,7 +78,8 @@ public class ControladorUsuarios {
             @RequestParam("celular") String celular,
             @RequestParam("correo") String correo,
             @RequestParam("direccion") String direc,
-            @RequestParam("cargo") String cargo,
+            @RequestParam("cargo") Roles cargo,
+            @RequestParam("contraseña") String contra,
             Model model) {
         Usuarios u = new Usuarios();
         u.setId(id);
@@ -73,8 +89,8 @@ public class ControladorUsuarios {
         u.setCelular(celular);
         u.setCorreo(correo);
         u.setDireccion(direc);
-        u.setTipoRol(cargo);
-
+        u.setTipoRol((List<Roles>) cargo);
+        u.setPassword(contra); 
         serviceUsuarios.Guardar(u);
 
         return Mostrar(model);

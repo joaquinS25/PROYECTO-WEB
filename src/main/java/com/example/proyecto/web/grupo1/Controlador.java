@@ -28,9 +28,14 @@ public class Controlador {
     }*/
      @Autowired
     private IEmpleadosService service;
-    @GetMapping("/")
-    public String index() {
+     @GetMapping("/inicio")
+    public String inicio() {
         return "index"; //index.html
+    }
+     
+    @GetMapping("/")
+    public String login() {
+        return "login/login"; //index.html
     }
     @GetMapping("/listadoEmpleados")
     public String Mostrar(Model model) {

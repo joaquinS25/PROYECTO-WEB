@@ -28,9 +28,23 @@ public class Usuarios {
     String celular;
     String correo;
     String direccion;
-
+    String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
     private List<Roles> tipoRol;
 
+    public Usuarios(String dni, String nombre, String apellido, String celular, String correo, String direccion, String password, List<Roles> tipoRol) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.celular = celular;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.password = password;
+        this.tipoRol = tipoRol;
+    }
+
+    public Usuarios() {
+        
+    }
 }

@@ -3,7 +3,7 @@
     src: url(../fonts/puppybellies/PuppyBellies.ttf);
 }
 .fondo-trailer{
-    background: url("fondo.webp");
+    background: url("fondo.jpg");
     background-size: 100%;
     background-repeat: repeat;
 }

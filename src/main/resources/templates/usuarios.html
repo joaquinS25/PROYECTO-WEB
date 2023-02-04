@@ -269,11 +269,15 @@
                             <div class="col-md-12">
                                 <label for="exampleFormControlInput6" class="form-label">Cargo</label>
                                 <select name="cargo" id="cargo" class="form-control">
-                                    <option value="">Seleccione</option>
-                                    <option>Coordinadora de Viajes</option>
-                                    <option>Asistente Administrativa</option>
+                                    <option value="" selected="selected" >-Seleccione Rol-</option>
+                                    <option th:each="rol : ${rol}" th:value="${rol.id}" th:text="${rol.cargo}"></option>
+                                    
                                 </select>       
                             </div>   
+                            <div class="col-md-16">
+                                <label for="exampleFormControlInput5" class="form-label">Contraseña</label>
+                                <input type="password" name="contraseña" id="contraseña" class="form-control" required>                    
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">

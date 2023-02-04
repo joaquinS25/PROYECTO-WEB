@@ -24,6 +24,7 @@ public class UsuariosService implements IUsuariosService{
 
     @Override
     public void Guardar(Usuarios u) {
+       u  = new Usuarios(u.getDni(), u.getNombre(), u.getApellido(), u.getCelular(), u.getCorreo(), u.getDireccion(), u.getPassword(), u.getTipoRol());
         data.save(u);
     }
 
@@ -36,5 +37,7 @@ public class UsuariosService implements IUsuariosService{
     public List<Usuarios> Buscar(String dato) {
         return data.buscarPorTodo(dato);
     }
+    
+    
     
 }

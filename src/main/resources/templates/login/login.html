@@ -25,7 +25,7 @@
                                 <div class="col mx-auto">
                                     <div class="card detallando border border-light p-3">
                                         <div class="card-body p-4 rounded text-center">
-                                            <h3>INICIAR SESIÓN</h3>
+                                            <h3 clas="fw-bold ">INICIAR SESIÓN</h3>
                                             <img src="perfil-del-usuario.png" alt="huella" height="150" width="150">
                                             
                                         </div>
@@ -33,17 +33,17 @@
                                         <div class="form-body">
                                             <form class="row g-4">
                                                 <div class="col-12 text-center">
-                                                    <label class="form-label ">Usuario</label>
+                                                    <label class="form-label fw-bold ">Usuario</label>
                                                     <input type="text" class="form-control" id="usuario" placeholder="Ingresa tu usuario">
                                                 </div>
                                                 <div class="col-12 text-center">
-                                                    <label class="form-label">Contraseña</label>
+                                                    <label class="form-label fw-bold">Contraseña</label>
                                                     <div class="input-group" id="show_hide_password">
                                                         <input type="password" class="form-control border-end-0 btn-clave" id="clave" placeholder="Ingresa tu contraseña"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-12 text-center">
-                                                    <label class="form-label ">Cargo</label>
+                                                    <label class="form-label fw-bold ">Cargo</label>
                                                     <select class="form-select" aria-label="Seleccione">
                                                         <option selected>--Seleccione--</option>
                                                         <option value="Gerente">Gerente</option>
@@ -53,9 +53,9 @@
                                                 </div>
 
                                                 <div class="col-12 d-grid">
-                                                    <button type="button" id="login" class="btn btn-fondo"><a class="text-light nav-link active" href="./pages/menu-administrador.html">ENTRAR</a></button>
+                                                    <button type="button" id="login" class="btn btn-fondo fw-bold"><a class="text-light nav-link active" th:href="@{/usuarios}">ENTRAR</a></button>
                                                     <br>
-                                                    <p class="text-center text-light estilo-letra-mascota">¿Olvidaste tu contraseña? <a th:href="@{/restablecer}">Restablecer aquí</a></p>	
+                                                    <p class="text-center fw-bold text-light estilo-letra-mascota">¿Olvidaste tu contraseña? <a th:href="@{/restablecer}">Restablecer aquí</a></p>	
                                                 </div>
                                             </form>
                                         </div>
