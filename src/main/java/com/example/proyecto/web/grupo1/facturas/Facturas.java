@@ -20,7 +20,6 @@ public class Facturas {
      @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY) //Autoincremental
     private int id;
-    //private int NumOrden;
     private String NumFactura;
     private String NomProveedor;
     @Temporal(TemporalType.DATE)
@@ -29,8 +28,6 @@ public class Facturas {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = ISO.DATE)
     private Date FechaRecepcion;
-    //private float MontoSoles;
-    //private float MontoDolares;
     private String TipoMoneda;
     private float Monto;
     @Temporal(TemporalType.DATE)

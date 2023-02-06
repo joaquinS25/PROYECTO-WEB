@@ -192,6 +192,7 @@
                     <th>CORREO</th>
                     <th>DIRECCION</th>
                     <th>CARGO</th>
+                    <th>CONTRASEÑA</th>
                     <th>ACCIONES</th>
                 </tr>
                 <tr th:each="usuarios,status : ${usuarios}"  th:if="${usuarios.id!=''}">
@@ -204,6 +205,7 @@
                     <td th:text="${usuarios.correo}"></td>
                     <td th:text="${usuarios.direccion}"></td>
                     <td th:text="${usuarios.cargo}"></td>
+                    <td th:text="${usuarios.contraseña}"></td>
 
                     <td class="d-flex">
                         <a onclick="return Eliminar(this)" th:href="@{/eliminarUsuario(id=${usuarios.id})}" class="me-2 btn btn-danger"> <i class="bi bi-trash-fill"></i> </a>
@@ -216,7 +218,8 @@
                                 data-bs-celular=${usuarios.celular},
                                 data-bs-correo=${usuarios.correo},
                                 data-bs-direccion=${usuarios.direccion},
-                                data-bs-cargo=${usuarios.cargo}"><i class="bi bi-pencil"></i></button>
+                                data-bs-cargo=${usuarios.cargo},
+                                data-bs-contraseña=${usuarios.contraseña}"><i class="bi bi-pencil"></i></button>
                         <!--a onclick="return Editar(this)" th:href="@{/editarEmpleado(id=${empleados.id})}" class="btn btn-warning"> <i class="bi bi-pencil"></i> </a-->
 
                     </td>

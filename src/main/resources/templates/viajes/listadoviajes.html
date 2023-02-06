@@ -14,31 +14,36 @@
         <!-- SweetAlert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function Agregar1() {
+           function Agregar1()
+            {
                 event.preventDefault();
-
-                Swal.fire({
-                    title: '¿Estas seguro de agregar un nuevo viaje?',
-                    text: "Se podrá modificar en el futuro",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                                'Agregado!',
-                                'El viaje ha sido agregado.',
-                                'Exito'
-                                ).then((result) => {
-                            if (result.isConfirmed) {
-                                const formulario = document.getElementById('agregar');
-                                formulario.submit();
-                            }
-                        });
-                    }
-                }); 
+                const id = document.getElementById("id").value;
+                const nombre = document.getElementById("Nombre").value;
+                const PlacaTracto = document.getElementById("PlacaTracto").value;
+                const PlacaCarreta = document.getElementById("PlacaCarreta").value;
+                const Fecha = document.getElementById("Fecha").value;
+                const TipoServicio = document.getElementById("TipoServicio").value;
+                const Cliente = document.getElementById("Cliente").value;
+                const Destino = document.getElementById("Destino").value;
+                const AlmacenRetiroContenedor = document.getElementById("AlmacenRetiroContenedor").value;
+                const AlmacenDevolucionContenedor = document.getElementById("AlmacenDevolucionContenedor").value;
+                const MontoViaje = document.getElementById("MontoViaje").value;
+                
+                           
+                if (id !== "" && nombre !== "" && PlacaTracto !== "" && PlacaCarreta !== "" && Fecha !== "" && TipoServicio !== "" && Cliente !== "" && Destino !== "" && AlmacenRetiroContenedor !== "" && AlmacenDevolucionContenedor !== "" && MontoViaje !== "")
+                {
+                    Swal.fire({
+                        title: 'El viaje ha sido agregado.',
+                        icon: 'success'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const form = document.getElementById("agregar");
+                            form.submit();
+                        }
+                    });
+                } else {
+                    Swal.fire('No deje campos en blanco por favor')
+                }
             }
            
             function Eliminar(opcion)

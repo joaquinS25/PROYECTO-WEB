@@ -1,4 +1,3 @@
-
 package com.example.proyecto.web.grupo1;
 
 import com.example.proyecto.web.grupo1.empleados.Empleados;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class Controlador {
+
     /*@GetMapping("/registroCamiones")
     public String registroCamiones() {
         return "registroCamiones"; //index.html
@@ -26,31 +26,42 @@ public class Controlador {
     public String registroViajes() {
         return "registroViajes"; //index.html
     }*/
-     @Autowired
+    @Autowired
     private IEmpleadosService service;
+
     @GetMapping("/")
+    public String login() {
+        return "login/login"; //index.html
+    }
+
+    @GetMapping("/index")
     public String index() {
         return "index"; //index.html
     }
+
     @GetMapping("/listadoEmpleados")
     public String Mostrar(Model model) {
         List<Empleados> empleados = service.Listar();
         model.addAttribute("empleados", empleados);
         return "empleados/listadoEmpleados"; //listapatenciones.html
     }
-     @GetMapping("/eliminarEmpleado")
+
+    @GetMapping("/eliminarEmpleado")
     public String Eliminar(@RequestParam("id") int id, Model model) {
 
         service.Eliminar(id);
         return Mostrar(model);
     }
-     @GetMapping("/registroEmpleados") // http://localhost/
-    public String registroEmpleados(){
+
+    @GetMapping("/registroEmpleados") // http://localhost/
+    public String registroEmpleados() {
         return "empleados/registroEmpleados"; //new_servicio.html
     }
+
     @PostMapping("/registroEmpleados")
     public String Registrar(@RequestParam("dni") String dni,
             @RequestParam("nombre") String nom,
+            @RequestParam("apellido") String ape,
             @RequestParam("sexo") String sexo,
             @RequestParam("num_licencia") String numLic,
             @RequestParam("celular") String celular,
@@ -60,6 +71,7 @@ public class Controlador {
         Empleados e = new Empleados();
         e.setDni(dni);
         e.setNombre(nom);
+        e.setApellido(ape);
         e.setSexo(sexo);
         e.setNum_licencia(numLic);
         e.setCelular(celular);
@@ -80,6 +92,7 @@ public class Controlador {
     public String Actualizar(@RequestParam("id") int id,
             @RequestParam("dni") String dni,
             @RequestParam("nombre") String nom,
+            @RequestParam("apellido") String ape,
             @RequestParam("sexo") String sexo,
             @RequestParam("num_licencia") String numLic,
             @RequestParam("celular") String celular,
@@ -90,6 +103,7 @@ public class Controlador {
         e.setId(id);
         e.setDni(dni);
         e.setNombre(nom);
+        e.setApellido(ape);
         e.setSexo(sexo);
         e.setNum_licencia(numLic);
         e.setCelular(celular);

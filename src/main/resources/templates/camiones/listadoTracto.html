@@ -116,12 +116,6 @@
                     <button class="btn btn-outline-primary me-5" type="submit">Buscar</button>
                 </div>
                 <div class="col-auto">
-                    <a th:href="@{/ascendenteTracto}" class="ms-5 btn btn-success" ><i class="bi bi-sort-up"></i>Orden Ascendente</a>
-                </div>
-                <div class="col-auto">
-                    <a th:href="@{/descendenteTracto}" class="btn btn-danger"><i class="bi bi-sort-down"></i>Orden Descendente</a>
-                </div>
-                <div class="col-auto">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i>Agregar Tracto</button>
                 </div>                
             </form>
@@ -140,7 +134,7 @@
                     <th>Aciones</th>
                 </tr>
                 <tr th:each="tractos,status : ${tractos}"  th:if="${tractos.id!=''}">
-                   
+
                     <td th:text="${tractos.id}"></td>                   
                     <td th:text="${tractos.PlacaTracto}"></td>
                     <td th:text="${tractos.TipoTraccion}"></td>

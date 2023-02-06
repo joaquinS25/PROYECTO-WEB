@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class ControladorLogin {
     @GetMapping("/login") // http://localhost/
-    public String registroCamiones() {
+    public String Login() {
         return "login/login"; //login.html
     }
 }
