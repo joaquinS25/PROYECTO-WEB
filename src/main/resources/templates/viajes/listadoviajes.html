@@ -14,38 +14,33 @@
         <!-- SweetAlert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-           function Agregar1()
-            {
+            function Agregar1() {
                 event.preventDefault();
-                const id = document.getElementById("id").value;
-                const nombre = document.getElementById("Nombre").value;
-                const PlacaTracto = document.getElementById("PlacaTracto").value;
-                const PlacaCarreta = document.getElementById("PlacaCarreta").value;
-                const Fecha = document.getElementById("Fecha").value;
-                const TipoServicio = document.getElementById("TipoServicio").value;
-                const Cliente = document.getElementById("Cliente").value;
-                const Destino = document.getElementById("Destino").value;
-                const AlmacenRetiroContenedor = document.getElementById("AlmacenRetiroContenedor").value;
-                const AlmacenDevolucionContenedor = document.getElementById("AlmacenDevolucionContenedor").value;
-                const MontoViaje = document.getElementById("MontoViaje").value;
-                
-                           
-                if (id !== "" && nombre !== "" && PlacaTracto !== "" && PlacaCarreta !== "" && Fecha !== "" && TipoServicio !== "" && Cliente !== "" && Destino !== "" && AlmacenRetiroContenedor !== "" && AlmacenDevolucionContenedor !== "" && MontoViaje !== "")
-                {
-                    Swal.fire({
-                        title: 'El viaje ha sido agregado.',
-                        icon: 'success'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const form = document.getElementById("agregar");
-                            form.submit();
-                        }
-                    });
-                } else {
-                    Swal.fire('No deje campos en blanco por favor')
-                }
+
+                Swal.fire({
+                    title: '¿Estas seguro de agregar un nuevo viaje?',
+                    text: "Se podrá modificar en el futuro",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                                'Agregado!',
+                                'El viaje ha sido agregado.',
+                                'Exito'
+                                ).then((result) => {
+                            if (result.isConfirmed) {
+                                const formulario = document.getElementById('agregar');
+                                formulario.submit();
+                            }
+                        });
+                    }
+                });
             }
-           
+
             function Eliminar(opcion)
             {
                 event.preventDefault();
@@ -114,8 +109,6 @@
                     const button = event.relatedTarget;
                     //datos
                     //const NumOrden = button.getAttribute('data-bs-NumOrden');
-
-
                     const id = button.getAttribute('data-bs-id');
                     const nombre = button.getAttribute('data-bs-nombre');
                     const PlacaTracto = button.getAttribute('data-bs-PlacaTracto');
@@ -131,10 +124,10 @@
                     //campos
                     //const campoNumOrden = document.getElementById("NumOrden");
                     const campoId = document.getElementById("id");
-                    const camponombre = document.getElementById("nombrex");
-                    const campoPlacaTracto = document.getElementById("PlacaTractox");
-                    const campoPlacaCarreta = document.getElementById("PlacaCarretax");
-                    const campoFecha = document.getElementById("Fechax");
+                    const camponombre = document.getElementById("nombre");
+                    const campoPlacaTracto = document.getElementById("PlacaTracto");
+                    const campoPlacaCarreta = document.getElementById("PlacaCarreta");
+                    const campoFecha = document.getElementById("Fecha");
                     const campoTipoServicio = document.getElementById("TipoServiciox");
                     const campoCliente = document.getElementById("Clientex");
                     const campoDestino = document.getElementById("Destinox");
@@ -157,7 +150,7 @@
 
 
 
-                })
+                });
             }
 
         </script>
@@ -233,7 +226,7 @@
                     <th>Aciones</th>
                 </tr>
                 <tr th:each="viajes,status : ${viajes}"  th:if="${viajes.id!=''}">
-                    
+
                     <td th:text="${viajes.id}"></td>
                     <td th:text="${#dates.format(viajes.Fecha, 'dd-MMM-yyyy')}"></td>
                     <td th:text="${viajes.TipoServicio}"></td>
@@ -251,11 +244,11 @@
 
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditar" 
                                 th:attr="data-bs-id=${viajes.id},
-                                data-bs-Fecha=${viajes.Fecha},
-                                data-bs-TipoServicio=${viajes.TipoServicio},
                                 data-bs-nombre=${viajes.empleados.nombre},
                                 data-bs-PlacaTracto=${viajes.tractos.PlacaTracto},
                                 data-bs-PlacaCarreta=${viajes.carretas.PlacaCarreta},
+                                data-bs-Fecha=${viajes.Fecha},
+                                data-bs-TipoServicio=${viajes.TipoServicio},
                                 data-bs-Cliente=${viajes.Cliente},
                                 data-bs-Destino=${viajes.Destino},
                                 data-bs-AlmacenRetiroContenedor=${viajes.AlmacenRetiroContenedor},
@@ -368,7 +361,7 @@
                             <input type="hidden" name="id" id="id">
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Conductor:</label>
-                                <select name="nombre" id="nombrex" class="form-control">
+                                <select name="nombre" id="nombre" class="form-control">
                                     <option value="">Seleccione</option>
                                     <option th:each="empleados : ${empleados}" th:value="${empleados.id}" th:text="${empleados.nombre}"></option>
                                 </select>
@@ -376,24 +369,30 @@
                             <div class="d-flex me-2">
                                 <div class="col-md-6 me-2">
                                     <label for="recipient-name" class="col-form-label">Placa Tracto:</label>
-                                    <select name="PlacaTracto" id="PlacaTractox" class="form-control">
+                                    <select name="PlacaTracto" id="PlacaTracto" class="form-control">
                                         <option value="">Seleccione</option>
                                         <option th:each="tractos : ${tractos}" th:value="${tractos.id}" th:text="${tractos.PlacaTracto}"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="recipient-name" class="col-form-label">Placa Carreta:</label>
-                                    <select name="PlacaCarreta" id="PlacaCarretax" class="form-control">
+                                    <select name="PlacaCarreta" id="PlacaCarreta" class="form-control">
                                         <option value="">Seleccione</option>
                                         <option th:each="carretas : ${carretas}" th:value="${carretas.id}" th:text="${carretas.PlacaCarreta}"></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="d-flex me-2">
+
                                 <div class="col-md-6 me-2">
+                                    <label for="recipient-name" class="col-form-label">Fecha de Emision:</label>
+                                    <input type="date" name="Fecha" id="Fecha" placeholder="Ingrese Fecha" class="form-control">
+                                </div>
+
+                                <!--div class="col-md-6 me-2">
                                     <label for="message-text" class="col-form-label">Fecha:</label>
                                     <input type="date" name="Fecha" id="Fechax" placeholder="Ingrese Fecha" class="form-control">
-                                </div>
+                                </div-->
                                 <div class="col-md-6">
                                     <label for="recipient-name" class="col-form-label">Tipo de Servicio:</label>
                                     <select name="TipoServicio" id="TipoServiciox" class="form-control">

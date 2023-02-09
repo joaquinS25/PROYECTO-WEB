@@ -313,10 +313,12 @@
                             <div class="d-flex">
                                 <div class="col-md-6 me-2">
                                     <label for="exampleFormControlInput2" class="form-label">Placa Tracto</label>
+                                     
                                     <select name="PlacaTracto" id="PlacaTractox" class="form-control">
                                         <option value="">Seleccione</option>
                                         <option th:each="tractos : ${tractos}" th:value="${tractos.id}" th:text="${tractos.PlacaTracto}"></option>
-                                    </select>                                      
+                                    </select>    
+                                 
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1" class="form-label">Placa Carreta</label>
