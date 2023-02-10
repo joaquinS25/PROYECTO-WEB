@@ -15,39 +15,39 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
-           
+
 
             function Agregar1() {
-            event.preventDefault();
-            Swal.fire({
-            title: '¿Estas seguro de agregar un nuevo viaje?',
+                event.preventDefault();
+                Swal.fire({
+                    title: '¿Estas seguro de agregar un nuevo viaje?',
                     text: "Se podrá modificar en el futuro",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-            Swal.fire(
-                    'Agregado!',
-                    'El conductor ha sido agregado.',
-                    'Exito'
-                    ).then((result) => {
-            if (result.isConfirmed) {
-            const formulario = document.getElementById('agregar');
-            formulario.submit();
-            }
-            });
-            }
-            });
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                                'Agregado!',
+                                'El conductor ha sido agregado.',
+                                'Exito'
+                                ).then((result) => {
+                            if (result.isConfirmed) {
+                                const formulario = document.getElementById('agregar');
+                                formulario.submit();
+                            }
+                        });
+                    }
+                });
             }
             function Eliminar(opcion)
             {
-            event.preventDefault();
-            Swal.fire({
+                event.preventDefault();
+                Swal.fire({
 
-            title: '¿Eliminar?',
+                    title: '¿Eliminar?',
                     text: "Esta desicion no se podra revertir",
                     icon: 'warning',
                     showCancelButton: true,
@@ -57,87 +57,87 @@
                     confirmButtonText: 'Eliminar',
                     allowOutsideClick: false,
                     allowEscapeKey: false
-            }).then((result) => {
-            if (result.isConfirmed) {
-            Swal.fire({
-            title: 'Eliminar',
-                    text: 'Eliminado correctamente',
-                    icon: 'success',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-            }).then((result) => {
-            if (result.isConfirmed) {
-            location.href = opcion.href;
-            }
-            });
-            }
-            });
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Eliminar',
+                            text: 'Eliminado correctamente',
+                            icon: 'success',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = opcion.href;
+                            }
+                        });
+                    }
+                });
             }
             function Actualizar()
             {
-            event.preventDefault();
-            Swal.fire({
-            title: 'Desea actualizar los cambios?',
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Desea actualizar los cambios?',
                     text: '',
                     showDenyButton: true,
                     confirmButtonText: 'Sí,actualizar',
                     denyButtonText: `No actualizar`
-            }).then((result) => {
-            if (result.isConfirmed) {
-            Swal.fire(
-                    'Éxito!',
-                    'Registro actualizado :)',
-                    'success'
-                    ).then((result) => {
-            if (result.isConfirmed)
-            {
-            const form1 = document.getElementById("actualizar");
-            form1.submit();
-            }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                                'Éxito!',
+                                'Registro actualizado :)',
+                                'success'
+                                ).then((result) => {
+                            if (result.isConfirmed)
+                            {
+                                const form1 = document.getElementById("actualizar");
+                                form1.submit();
+                            }
 
-            });
-            } else if (result.isDenied)
-            {
-            Swal.fire('Los cambios no se han actualizado', '', 'info');
-            }
-            });
+                        });
+                    } else if (result.isDenied)
+                    {
+                        Swal.fire('Los cambios no se han actualizado', '', 'info');
+                    }
+                });
             }
             function Editar() {
-            const exampleModal = document.getElementById('modalEditar');
-            exampleModal.addEventListener('show.bs.modal', event => {
-            // Button that triggered the modal
-            const button = event.relatedTarget;
-            //datos
-            const id = button.getAttribute('data-bs-id');
-            const dni = button.getAttribute('data-bs-dni');
-            const nombre = button.getAttribute('data-bs-nombre');
-            const apellido = button.getAttribute('data-bs-apellido');
-            const sexo = button.getAttribute('data-bs-sexo');
-            const num_licencia = button.getAttribute('data-bs-numlicencia');
-            const celular = button.getAttribute('data-bs-celular');
-            const correo = button.getAttribute('data-bs-correo');
-            const direccion = button.getAttribute('data-bs-direccion');
-            //campos
-            const campoId = document.getElementById("id");
-            const campoDni = document.getElementById("dni");
-            const campoSexo = document.getElementById("sexo");
-            const campoNombre = document.getElementById("nombre");
-            const campoApellido = document.getElementById("apellido");
-            const campoNum_licencia = document.getElementById("num_licencia");
-            const campoCelular = document.getElementById("celular");
-            const campoCorreo = document.getElementById("correo");
-            const campoDireccion = document.getElementById("direccion");
-            //Colocar los datos a los campos
-            campoId.value = id;
-            campoDni.value = dni;
-            campoSexo.value = sexo;
-            campoNombre.value = nombre;
-            campoApellido.value = apellido;
-            campoNum_licencia.value = num_licencia;
-            campoCelular.value = celular;
-            campoCorreo.value = correo;
-            campoDireccion.value = direccion;
-            })
+                const exampleModal = document.getElementById('modalEditar');
+                exampleModal.addEventListener('show.bs.modal', event => {
+                    // Button that triggered the modal
+                    const button = event.relatedTarget;
+                    //datos
+                    const id = button.getAttribute('data-bs-id');
+                    const dni = button.getAttribute('data-bs-dni');
+                    const nombre = button.getAttribute('data-bs-nombre');
+                    const apellido = button.getAttribute('data-bs-apellido');
+                    const sexo = button.getAttribute('data-bs-sexo');
+                    const num_licencia = button.getAttribute('data-bs-numlicencia');
+                    const celular = button.getAttribute('data-bs-celular');
+                    const correo = button.getAttribute('data-bs-correo');
+                    const direccion = button.getAttribute('data-bs-direccion');
+                    //campos
+                    const campoId = document.getElementById("id");
+                    const campoDni = document.getElementById("dni");
+                    const campoSexo = document.getElementById("sexo");
+                    const campoNombre = document.getElementById("nombre");
+                    const campoApellido = document.getElementById("apellido");
+                    const campoNum_licencia = document.getElementById("num_licencia");
+                    const campoCelular = document.getElementById("celular");
+                    const campoCorreo = document.getElementById("correo");
+                    const campoDireccion = document.getElementById("direccion");
+                    //Colocar los datos a los campos
+                    campoId.value = id;
+                    campoDni.value = dni;
+                    campoSexo.value = sexo;
+                    campoNombre.value = nombre;
+                    campoApellido.value = apellido;
+                    campoNum_licencia.value = num_licencia;
+                    campoCelular.value = celular;
+                    campoCorreo.value = correo;
+                    campoDireccion.value = direccion;
+                })
             }
 
         </script>
