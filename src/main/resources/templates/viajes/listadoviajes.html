@@ -14,7 +14,7 @@
         <!-- SweetAlert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function Agregar1() {
+           function Agregar1() {
                 event.preventDefault();
 
                 Swal.fire({
@@ -26,18 +26,63 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                                'Agregado!',
-                                'El viaje ha sido agregado.',
-                                'Exito'
-                                ).then((result) => {
-                            if (result.isConfirmed) {
-                                const formulario = document.getElementById('agregar');
-                                formulario.submit();
-                            }
-                        });
+                
+                
+                    var descripcionValidacion = ""
+                    var cliente = document.getElementById("Cliente").value;
+                    var destino = document.getElementById("Destino").value;
+                    var almacenRetiroContenedor = document.getElementById("AlmacenRetiroContenedor").value;
+                    var almacenDevolucionContenedor = document.getElementById("AlmacenDevolucionContenedor").value;                    
+                    var montoViaje = document.getElementById("MontoViaje").value;
+                    
+                    
+                    if(montoViaje.length>0){
+                        montoViaje = +montoViaje;
+                        if(montoViaje<1 || montoViaje>9999){
+                            descripcionValidacion= "El campo monto viaje no puede ser menor de 1 o mayor de 9999";
+                        }
+                    } else {
+                        descripcionValidacion = "El campo monto viaje no puede ser vacio";
                     }
+                    
+                    if(almacenDevolucionContenedor.length<3 || almacenDevolucionContenedor.length>25){
+                        descripcionValidacion = "El campo almacen devolución cotenedor no puede ser menor de 3 caracteres o mayor a 25 caracteres";
+                    }
+                    
+                    if(almacenRetiroContenedor.length<3 || almacenRetiroContenedor.length>25){
+                        descripcionValidacion = "El campo almacen retiro contenedor no puede ser menor de 3 caracteres o mayor a 25 caracteres";
+                    }
+                    
+                    if(destino.length<4 || destino.length>30){
+                        descripcionValidacion = "El campo destino no puede ser menor de 4 caracteres o mayor a 30 caracteres";
+                    }
+                    
+                    if(cliente.length<4 || cliente.length>30){
+                        descripcionValidacion = "El campo cliente no puede ser menor de 4 caracteres o mayor a 30 caracteres";
+                    }
+                    
+                    
+                    if (result.isConfirmed) {
+                        if(descripcionValidacion.length==0){
+                        
+                            Swal.fire(
+                                    'Agregado!',
+                                    'El viaje ha sido agregado.',
+                                    'Exito'
+                                    ).then((result) => {
+                                if (result.isConfirmed) {
+                                    const formulario = document.getElementById('agregar');
+                                    formulario.submit();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validación de campos',
+                                text: descripcionValidacion
+                            })
+                        }
+                    } 
                 });
             }
 
