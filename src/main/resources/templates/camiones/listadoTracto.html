@@ -49,8 +49,6 @@
                         descripcionValidacion = "El campo tipo traccion no puede quedar vacio";
                     } else if (Motor === "") {
                         descripcionValidacion = "El campo motor no puede quedar vacio";
-                    }else (Motor === "@" || Motor ==="{" || Motor "}" || Motor === ":"){
-                        
                     }
                     
                     
@@ -77,6 +75,7 @@
                     } 
                 });
             }
+           
             function Eliminar(opcion)
             {
                 event.preventDefault();

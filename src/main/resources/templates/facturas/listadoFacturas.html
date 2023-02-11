@@ -27,6 +27,8 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
                 }).then((result) => {
+                
+                
                     var descripcionValidacion = ""
                     var Monto = document.getElementById("Monto").value;
                     var NumFactura = document.getElementById("NumFactura").value;
@@ -34,8 +36,10 @@
                     var DepositoDetraccion = document.getElementById("DepositoDetraccion").value;  
                     var FechaEmision = document.getElementById("FechaEmision").value;
                     var FechaRecepcion = document.getElementById("FechaRecepcion").value;  
-                    var FechaPagoDetraccions = document.getElementById("FechaPagoDetraccion ").value;
-                    var FechaPago = document.getElementById("FechaPago").value; 
+                    var FechaPagoDetraccions = document.getElementById("FechaPagoDetraccion").value;
+                    var FechaPago = document.getElementById("FechaPago").value;  
+                    
+                    
                     if(Monto.length>0){
                         Monto = +Monto;
                         if(Monto<1 || Monto>9999){
@@ -58,7 +62,7 @@
                         descripcionValidacion = "El campo fecha de pago de detraccion no puede ser vacio";
                     }else if (FechaPago === ""){
                         descripcionValidacion = "El campo fecha de pago no puede ser vacio";
-                    }
+                    
                     if (result.isConfirmed) {
                         if(descripcionValidacion.length==0){
                         
@@ -83,7 +87,24 @@
                 });
             }
             
-                   
+           function soloLetras(e) {
+                var key = e.keyCode || e.which,
+                  tecla = String.fromCharCode(key).toLowerCase(),
+                  letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
+                  especiales = [8, 37, 39, 46],
+                  tecla_especial = false;
+
+                for (var i in especiales) {
+                  if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                  }
+                }
+
+                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                  return false;
+                }
+            }         
            
             function Eliminar(opcion)
             {
@@ -424,7 +445,7 @@
                                 </div>
                                 <div  class="col-md-12">
                                     <label for="exampleFormControlInput4" class="form-label">Nombre de Proveedor</label>
-                                    <input type="text" name="NomProveedor" id="NomProveedor" class="form-control" required> 
+                                    <input type="text" name="NomProveedor" id="NomProveedor" onkeypress="return soloLetras(event)" class="form-control" required> 
                                 </div>
 
                                 <div class="col-md-4">
@@ -454,7 +475,7 @@
                                 <div class="col-md-12">
                                     <label for="exampleFormControlInput10" class="form-label">Observacion</label>
                                     <!--input  name="Observacion" class="form-control" required-->                    
-                                    <textarea class="form-control" name="Observacion" id="Observacion" placeholder="Ingrese Observacion"></textarea>
+                                    <textarea class="form-control" name="Observacion" id="Observacion" onkeypress="return soloLetras(event)"placeholder="Ingrese Observacion"></textarea>
                                 </div> 
 
                                 <div class="d-grid gap-3 mt-5 mb-2">

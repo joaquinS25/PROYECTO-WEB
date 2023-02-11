@@ -85,7 +85,24 @@
                     } 
                 });
             }
+            function soloLetras(e) {
+                var key = e.keyCode || e.which,
+                  tecla = String.fromCharCode(key).toLowerCase(),
+                  letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
+                  especiales = [8, 37, 39, 46],
+                  tecla_especial = false;
 
+                for (var i in especiales) {
+                  if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                  }
+                }
+
+                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                  return false;
+                }
+            }
             function Eliminar(opcion)
             {
                 event.preventDefault();
@@ -363,21 +380,21 @@
                             <div class="d-flex mb-2">
                                 <div class=" col-md-6 me-3">
                                     <label for="recipient-name" class="col-form-label">Cliente:</label>
-                                    <input type="text" name="Cliente" id="Cliente" placeholder="Ingrese Cliente" class="form-control">
+                                    <input type="text" name="Cliente" id="Cliente" onkeypress="return soloLetras(event)" placeholder="Ingrese Cliente" class="form-control">
                                 </div>
                                 <div class=" col-md-6">
                                     <label for="recipient-name" class="col-form-label">Destino</label>
-                                    <input type="text" name="Destino" id="Destino" placeholder="Ingrese Destino" class="form-control">
+                                    <input type="text" name="Destino" id="Destino" onkeypress="return soloLetras(event)" placeholder="Ingrese Destino" class="form-control">
                                 </div>
                             </div>
                             <div class="d-flex mb-2">
                                 <div class="col-md-6 me-3">
                                     <label for="recipient-name" class="col-form-label">Almacen Retiro del Contenedor</label>
-                                    <input type="text" name="AlmacenRetiroContenedor" id="AlmacenRetiroContenedor" placeholder="Ingrese Almacen Retiro del Contenedor" class="form-control">
+                                    <input type="text" name="AlmacenRetiroContenedor" onkeypress="return soloLetras(event)" id="AlmacenRetiroContenedor" placeholder="Ingrese Almacen Retiro del Contenedor" class="form-control">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label for="recipient-name" class="col-form-label">Almacen Devolucion del Contenedor</label>
-                                    <input type="text" name="AlmacenDevolucionContenedor" id="AlmacenDevolucionContenedor" placeholder="Ingrese Almacen Devolucion del Contenedor" class="form-control">
+                                    <input type="text" name="AlmacenDevolucionContenedor" onkeypress="return soloLetras(event)" id="AlmacenDevolucionContenedor" placeholder="Ingrese Almacen Devolucion del Contenedor" class="form-control">
                                 </div>
                             </div>
                             <div class=" col-md-12 ">
