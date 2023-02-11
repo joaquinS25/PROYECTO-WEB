@@ -25,18 +25,56 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                                'Agregado!',
-                                'El tracto ha sido agregado.',
-                                'Exito'
-                                ).then((result) => {
-                            if (result.isConfirmed) {
-                                const formulario = document.getElementById('agregar');
-                                formulario.submit();
-                            }
-                        });
+                
+                
+                    var descripcionValidacion = ""
+                    var PlacaTracto = document.getElementById("PlacaTracto").value;
+                    var TipoTraccion = document.getElementById("TipoTraccion").value;
+                    var Potencia = document.getElementById("Potencia").value;
+                    var Motor = document.getElementById("Motor").value;  
+                    
+                    
+                      if (Potencia > 500) {
+                        descripcionValidacion = "La potencia del tracto no es válida";
                     }
+
+                    if (Potencia < 300) {
+                        descripcionValidacion = "La potencia del tracto no es válida";
+                    }else if (Potencia === ""){
+                        descripcionValidacion = "El campo potencia no puede quedar vacio";
+                    }
+                    if (PlacaTracto === "") {
+                        descripcionValidacion = "El campo placa tracto no puede quedar vacio";
+                    } else if (TipoTraccion === "") {
+                        descripcionValidacion = "El campo tipo traccion no puede quedar vacio";
+                    } else if (Motor === "") {
+                        descripcionValidacion = "El campo motor no puede quedar vacio";
+                    }else (Motor === "@" || Motor ==="{" || Motor "}" || Motor === ":"){
+                        
+                    }
+                    
+                    
+                    if (result.isConfirmed) {
+                        if(descripcionValidacion.length==0){
+                        
+                            Swal.fire(
+                                    'Agregado!',
+                                    'El tracto ha sido agregado.',
+                                    'Exito'
+                                    ).then((result) => {
+                                if (result.isConfirmed) {
+                                    const formulario = document.getElementById('agregar');
+                                    formulario.submit();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validación de campos',
+                                text: descripcionValidacion
+                            })
+                        }
+                    } 
                 });
             }
             function Eliminar(opcion)

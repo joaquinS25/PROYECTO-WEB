@@ -14,6 +14,7 @@
         <!-- SweetAlert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            
             function Agregar1() {
                 event.preventDefault();
 
@@ -26,20 +27,64 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                                'Agregado!',
-                                'La factura ha sido agregada.',
-                                'Exito'
-                                ).then((result) => {
-                            if (result.isConfirmed) {
-                                const formulario = document.getElementById('agregar');
-                                formulario.submit();
-                            }
-                        });
+                    var descripcionValidacion = ""
+                    var Monto = document.getElementById("Monto").value;
+                    var NumFactura = document.getElementById("NumFactura").value;
+                    var NomProveedor = document.getElementById("NomProveedor").value;
+                    var DepositoDetraccion = document.getElementById("DepositoDetraccion").value;  
+                    var FechaEmision = document.getElementById("FechaEmision").value;
+                    var FechaRecepcion = document.getElementById("FechaRecepcion").value;  
+                    var FechaPagoDetraccions = document.getElementById("FechaPagoDetraccion ").value;
+                    var FechaPago = document.getElementById("FechaPago").value; 
+                    if(Monto.length>0){
+                        Monto = +Monto;
+                        if(Monto<1 || Monto>9999){
+                            descripcionValidacion= "El campo monto de factura  no puede ser menor de 1 o mayor de 9999";
+                        }
+                    } else {
+                        descripcionValidacion = "El campo monto factura no puede ser vacio";
                     }
+                    if(NumFactura === ""){
+                        descripcionValidacion = "El campo numero de factura no puede ser vacio";
+                    }else if (NomProveedor === ""){
+                        descripcionValidacion = "El campo nombre de proveedor no puede ser vacio";
+                    }else if (DepositoDetraccion === ""){
+                        descripcionValidacion = "El campo deposito detraccion no puede ser vacio";
+                    }else if(FechaEmision ===""){
+                        descripcionValidacion = "El campo fecha de emision no puede ser vacio";
+                    }else if(FechaRecepcion===""){
+                         descripcionValidacion = "El campo fecha de recepcion no puede ser vacio";
+                    }else if (FechaPagoDetraccions === ""){
+                        descripcionValidacion = "El campo fecha de pago de detraccion no puede ser vacio";
+                    }else if (FechaPago === ""){
+                        descripcionValidacion = "El campo fecha de pago no puede ser vacio";
+                    }
+                    if (result.isConfirmed) {
+                        if(descripcionValidacion.length==0){
+                        
+                            Swal.fire(
+                                    'Agregado!',
+                                    'La factura ha sido agregada.',
+                                    'Exito'
+                                    ).then((result) => {
+                                if (result.isConfirmed) {
+                                    const formulario = document.getElementById('agregar');
+                                    formulario.submit();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validación de campos',
+                                text: descripcionValidacion
+                            })
+                        }
+                    } 
                 });
             }
+            
+                   
+           
             function Eliminar(opcion)
             {
                 event.preventDefault();
@@ -367,29 +412,20 @@
                                 </div-->
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput1" class="form-label">Número de Factura</label>
-                                    <input type="text" name="NumFactura" class="form-control" required>                    
+                                    <input type="text" name="NumFactura" id="NumFactura" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput2" class="form-label">Fecha de Emision:</label>
-                                    <input type="date" name="FechaEmision" class="form-control" required>                    
+                                    <input type="date" name="FechaEmision" id="FechaEmision" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput3" class="form-label">Fecha de Recepcion:</label>
-                                    <input type="date" name="FechaRecepcion" class="form-control" required>                    
+                                    <input type="date" name="FechaRecepcion" id="FechaRecepcion" class="form-control" required>                    
                                 </div>
                                 <div  class="col-md-12">
                                     <label for="exampleFormControlInput4" class="form-label">Nombre de Proveedor</label>
-                                    <input type="text" name="NomProveedor" class="form-control" required> 
+                                    <input type="text" name="NomProveedor" id="NomProveedor" class="form-control" required> 
                                 </div>
-
-                                <!--div class="col-md-6">
-                                    <label for="exampleFormControlInput5" class="form-label">Monto en Soles</label>
-                                    <input type="number" name="MontoSoles" class="form-control" required>                    
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="exampleFormControlInput6" class="form-label">Monto en Dolares</label>
-                                    <input type="number" name="MontoDolares" class="form-control" required>                    
-                                </div--> 
 
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput7" class="form-label">Tipo de Moneda:</label>
@@ -401,19 +437,19 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput7" class="form-label">Monto:</label>
-                                    <input type="number" name="Monto" class="form-control" required>                    
+                                    <input type="number" name="Monto" id="Monto" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput7" class="form-label">Fecha de Pago de Detraccion:</label>
-                                    <input type="date" name="FechaPagoDetraccion" class="form-control" required>                    
+                                    <input type="date" name="FechaPagoDetraccion" id="FechaPagoDetraccion" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput8" class="form-label">Monto de Detraccion:</label>
-                                    <input type="number" name="DepositoDetraccion" class="form-control" required>                    
+                                    <input type="number" name="DepositoDetraccion" id="DepositoDetraccion" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput9" class="form-label">Fecha Aprox. de Pago</label>
-                                    <input type="date" name="FechaPago" class="form-control" required>                    
+                                    <input type="date" name="FechaPago" id="FechaPago" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-12">
                                     <label for="exampleFormControlInput10" class="form-label">Observacion</label>

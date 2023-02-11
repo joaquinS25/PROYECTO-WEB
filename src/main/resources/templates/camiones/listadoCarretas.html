@@ -17,7 +17,7 @@
                 event.preventDefault();
 
                 Swal.fire({
-                    title: '¿Estas seguro de agregar una nueva carreta?',
+                    title: '¿Estas seguro de agregar un nueva carreta?',
                     text: "Se podrá modificar en el futuro",
                     icon: 'warning',
                     showCancelButton: true,
@@ -25,17 +25,56 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
                 }).then((result) => {
+
+
+                    var descripcionValidacion = ""
+                    var PlacaCarreta = document.getElementById("PlacaCarreta").value;
+                    var Peso = document.getElementById("Peso").value;
+                    var Largo = document.getElementById("Largo").value;
+                    var Ancho = document.getElementById("Ancho").value;
+
+                    if (Largo < 10) {
+                        descripcionValidacion = "El largo de la carreta es inválido";
+                    }
+
+                    if (Largo > 10) {
+                        descripcionValidacion = "El largo de la carreta es inválido";
+                    }else if (Largo === ""){
+                        descripcionValidacion = "El campo largo no puede quedar vacio";
+                    }
+                    if (Peso === "") {
+                        descripcionValidacion = "El campo peso no puede quedar vacio";
+                    } else if (Ancho === "") {
+                        descripcionValidacion = "El campo ancho no puede quedar vacio";
+                    } else if (Ancho === "") {
+                        descripcionValidacion = "El campo Ancho no puede quedar vacio";
+                    }else if (PlacaCarreta === "") {
+                        descripcionValidacion = "El campo placa carreta no puede estar vacio";
+                    }
+
+
+
+
                     if (result.isConfirmed) {
-                        Swal.fire(
-                                'Agregado!',
-                                'El tracto ha sido agregado.',
-                                'Exito'
-                                ).then((result) => {
-                            if (result.isConfirmed) {
-                                const formulario = document.getElementById('agregar');
-                                formulario.submit();
-                            }
-                        });
+                        if (descripcionValidacion.length == 0) {
+
+                            Swal.fire(
+                                    'Agregado!',
+                                    'La carreta ha sido agregado con exito.',
+                                    'Exito'
+                                    ).then((result) => {
+                                if (result.isConfirmed) {
+                                    const formulario = document.getElementById('agregar');
+                                    formulario.submit();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validación de campos',
+                                text: descripcionValidacion
+                            })
+                        }
                     }
                 });
             }
@@ -70,7 +109,7 @@
                     }
                 });
             }
-            
+
 
         </script>
     </head>
@@ -81,17 +120,17 @@
         <hr class="container mt-5">
         <ul class="nav nav-tabs container justify-content-center align-items-center">
             <li class="nav-item">
-                    <a class="nav-link" th:href="@{/listadoEmpleados}" aria-current="page">Conductores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/listadoCamiones}">Camiones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/listadoViajes}">Viajes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/listadoFacturas}">Facturas</a>
-                </li>
+                <a class="nav-link" th:href="@{/listadoEmpleados}" aria-current="page">Conductores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/listadoCamiones}">Camiones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/listadoViajes}">Viajes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/listadoFacturas}">Facturas</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link  " th:href="@{/listadoTracto}" aria-current="page">Tractos</a>
             </li>
@@ -115,7 +154,7 @@
                 <div class="col-auto">
                     <button class="btn btn-outline-primary me-5" type="submit">Buscar</button>
                 </div>
-             
+
                 <div class="col-auto">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i>Agregar Carretas</button>
                 </div>                
@@ -135,7 +174,7 @@
                     <th>Aciones</th>
                 </tr>
                 <tr th:each="carretas,status : ${carretas}"  th:if="${carretas.id!=''}">
-                 
+
                     <td th:text="${carretas.id}"></td>                   
                     <td th:text="${carretas.PlacaCarreta}"></td>
                     <td th:text="${carretas.Peso}"></td>
@@ -144,7 +183,7 @@
                     <td class="d-flex">
                         <a onclick="return Eliminar(this)" th:href="@{/eliminarCarreta(id=${carretas.id})}" class="me-2 btn btn-danger"> <i class="bi bi-trash-fill"></i> </a>
 
-                        
+
                     </td>
                 </tr>
             </table> 
@@ -194,50 +233,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button onclick="return Agregar1()" type="button" class="btn btn-primary">Registrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--MODAL EDITAR-->
-        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Carreta</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="actualizarCarreta" method="POST" id="actualizar" class="p-5">
-                            <input type="hidden" name="id" id="id">
-
-                            <div class="d-flex mb-2">
-                                <div class="col-md-6 me-3">
-                                    <label for="recipient-name" class="col-form-label">Placa Careta</label>
-                                    <input type="text" name="PlacaCarreta" id="PlacaCarretax" placeholder="Ingrese Placa de Carreta" class="form-control">
-
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="recipient-name" class="col-form-label">Peso</label>
-                                    <input type="text" name="Peso" id="Pesox" placeholder="Ingrese Peso de la Carreta" class="form-control">
-
-                                </div>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <div class=" col-md-6 me-3">
-                                    <label for="message-text" class="col-form-label">Largo</label>
-                                    <input type="text" name="Largo" id="Largox" placeholder="Ingrese Largo" class="form-control">
-                                </div>
-                                <div class=" col-md-6">
-                                    <label for="recipient-name" class="col-form-label">Ancho:</label>
-                                    <input type="text" name="Ancho" id="Anchox" placeholder="Ingrese Motor" class="form-control">
-
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button onclick="return Actualizar()" type="button" class="btn btn-primary">Actualizar </button>
                     </div>
                 </div>
             </div>
