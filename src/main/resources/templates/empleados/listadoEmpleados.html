@@ -16,8 +16,10 @@
         <script>
 
 
-         function Agregar1() {
+
+            function Agregar1() {
                 event.preventDefault();
+
                 Swal.fire({
                     title: '¿Estas seguro de agregar un nuevo viaje?',
                     text: "Se podrá modificar en el futuro",
@@ -27,37 +29,79 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Aceptar'
                 }).then((result) => {
+                    var descripcionValidacion = ""
+                    var dni = document.getElementById("dnix").value;
+                    var sexo = document.getElementById("sexox").value;
+                    var nombre = document.getElementById("nombrex").value;
+                    var apellido = document.getElementById("apellidox").value;
+                    var num_licencia = document.getElementById("num_licenciax").value;
+                    var celular = document.getElementById("celularx").value;
+                    var correo = document.getElementById("correox").value;
+                    var direccion = document.getElementById("direccionx").value;
+
+                    if (dni === "") {
+                        descripcionValidacion = "El campo DNI no puede estar vacio";
+                    } else if (sexo === "") {
+                        descripcionValidacion = "El campo sexo no puede estar vacio";
+                    } else if (nombre === "") {
+                        descripcionValidacion = "El campo nombre no puede estar vacio";
+                    } else if (apellido === "") {
+                        descripcionValidacion = "El campo apellido no puede estar avcio";
+                    } else if (num_licencia === "") {
+                        descripcionValidacion = "El campo numero de licencia no puede estar vacio";
+                    } else if (celular === "") {
+                        descripcionValidacion = "El campo celular no puede estar vacio";
+                    } else if (correo === "") {
+                        descripcionValidacion = "El campo correo no puese quedar vacio";
+                    } else if (direccion === "") {
+                        descripcionValidacion = "El campo direccion no puede estar vacion";
+                    }
+                    if (num_licencia.length >= 10 || num_licencia.length <= 8) {
+                        descripcionValidacion = "El campo numero de licencia tiene que ser de 9 figitos";
+                    }
+
                     if (result.isConfirmed) {
-                        Swal.fire(
-                                'Agregado!',
-                                'El conductor ha sido agregado.',
-                                'Exito'
-                                ).then((result) => {
-                            if (result.isConfirmed) {
-                                const formulario = document.getElementById('agregar');
-                                formulario.submit();
-                            }
-                        });
+                        if (descripcionValidacion.length == 0) {
+
+                            Swal.fire(
+                                    'Agregado!',
+                                    'El viaje ha sido agregado.',
+                                    'Exito'
+                                    ).then((result) => {
+                                if (result.isConfirmed) {
+                                    const formulario = document.getElementById('agregar');
+                                    formulario.submit();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validación de campos',
+                                text: descripcionValidacion
+                            })
+                        }
                     }
                 });
             }
-			
+
+
+
             function soloLetras(e) {
                 var key = e.keyCode || e.which,
-                  tecla = String.fromCharCode(key).toLowerCase(),
-                  letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
-                  especiales = [8, 37, 39, 46],
-                  tecla_especial = false;
+                        tecla = String.fromCharCode(key).toLowerCase(),
+                        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
+                        especiales = [8, 37, 39, 46],
+                        tecla_especial = false;
 
                 for (var i in especiales) {
-                  if (key == especiales[i]) {
-                    tecla_especial = true;
-                    break;
-                  }
+                    if (key == especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
                 }
 
                 if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-                  return false;
+                    return false;
                 }
             }
             function Eliminar(opcion)
@@ -335,20 +379,20 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput2" class="form-label">DNI</label>
-                                    <input type="text" name="dni" id="dni" class="form-control" required>                    
+                                    <input type="text" name="dni" id="dnix" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1" class="form-label">Nombre:</label>
-                                    <input type="text" name="nombre" id="nombre" onkeypress="return soloLetras(event)" class="form-control" required>                    
+                                    <input type="text" name="nombre" id="nombrex" onkeypress="return soloLetras(event)" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1" class="form-label">Apellido:</label>
-                                    <input type="text" name="apellido" id="apellido" onkeypress="return soloLetras(event)" class="form-control" required>                    
+                                    <input type="text" name="apellido" id="apellidox" onkeypress="return soloLetras(event)" class="form-control" required>                    
                                 </div>
                                 <div  class="col-md-6">
                                     <label for="validationTooltip03" class="form-label">Sexo</label>
                                     <!--input type="text" name="sexo" id="sexo" class="form-control" required-->   
-                                    <select name="sexo" id="sexo" class="form-control">
+                                    <select name="sexo" id="sexox" class="form-control">
                                         <option value="">Seleccione</option>
                                         <option>MASCULINO</option>
                                         <option>FEMENINO</option>
@@ -356,19 +400,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput3" class="form-label">N° Licencia</label>
-                                    <input type="text" name="num_licencia" id="num_licencia" class="form-control" required>                    
+                                    <input type="text" name="num_licencia" id="num_licenciax" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput4" class="form-label">Celular</label>
-                                    <input type="text" name="celular" id="celular" class="form-control" required>                    
+                                    <input type="number" name="celular" id="celularx" class="form-control" required>                    
                                 </div>
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput5" class="form-label">Correo</label>
-                                    <input type="email" name="correo" id="correo"  class="form-control" required>                    
+                                    <input type="email" name="correo" id="correox"  class="form-control" required>                    
                                 </div>
                                 <div class="col-md-12">
                                     <label for="exampleFormControlInput6" class="form-label">Dirección</label>
-                                    <input type="text" name="direccion" id="direccion"  class="form-control" required>                    
+                                    <input type="text" name="direccion" id="direccionx"  class="form-control" required>                    
                                 </div>                        
                                 <!--div class="d-grid gap-3 mt-5 mb-2">
                                     <button onclick="return Agregar1()" class="btn btn-warning" type="submit" name="registrar"><i class="bi bi-check-circle-fill"></i> Agregar Empleado</button>
