@@ -51,7 +51,9 @@
                     }else if (PlacaCarreta === "") {
                         descripcionValidacion = "El campo placa carreta no puede estar vacio";
                     }
-
+                       if (PlacaCarreta.length >= 8 || PlacaCarreta.length <= 5) {
+                        descripcionValidacion = "FORMATO DE PLACA INVALIDO";
+                    }
 
 
 

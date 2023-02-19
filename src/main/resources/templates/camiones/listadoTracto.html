@@ -50,7 +50,9 @@
                     } else if (Motor === "") {
                         descripcionValidacion = "El campo motor no puede quedar vacio";
                     }
-                    
+                      if (PlacaTracto.length >= 8 || PlacaTracto.length <= 5) {
+                        descripcionValidacion = "FORMATO DE PLACA INVALIDO";
+                    }
                     
                     if (result.isConfirmed) {
                         if(descripcionValidacion.length==0){
